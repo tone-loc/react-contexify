@@ -78,9 +78,17 @@ class Item extends Component<ItemProps> {
   };
 
   render() {
-    const { className, style, children } = this.props;
+    const {
+      className,
+      style,
+      children,
+      disabled,
+      nativeEvent,
+      propsFromTrigger,
+      data
+    } = this.props;
 
-    disabled = =
+    const isDisabled =
       typeof disabled === 'function'
         ? disabled({
             event: nativeEvent as TriggerEvent,
@@ -89,7 +97,7 @@ class Item extends Component<ItemProps> {
         : disabled;
 
     const cssClasses = cx(styles.item, className, {
-      [`${styles.itemDisabled}`]: disabled
+      [`${styles.itemDisabled}`]: isDisabled
     });
 
     return (
