@@ -80,8 +80,16 @@ class Item extends Component<ItemProps> {
   render() {
     const { className, style, children } = this.props;
 
+    disabled = =
+      typeof disabled === 'function'
+        ? disabled({
+            event: nativeEvent as TriggerEvent,
+            props: { ...propsFromTrigger, ...data }
+          })
+        : disabled;
+
     const cssClasses = cx(styles.item, className, {
-      [`${styles.itemDisabled}`]: this.isDisabled
+      [`${styles.itemDisabled}`]: disabled
     });
 
     return (
